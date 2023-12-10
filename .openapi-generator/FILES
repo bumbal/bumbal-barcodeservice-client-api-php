@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .php-cs-fixer.dist.php
 .travis.yml
 README.md
@@ -21,7 +20,3 @@ src/Model/CreateBarcodeResponseData.php
 src/Model/ModelInterface.php
 src/Model/ShowBarcodeResponse.php
 src/ObjectSerializer.php
-test/Model/ApiResponseTest.php
-test/Model/CreateBarcodeResponseDataTest.php
-test/Model/CreateBarcodeResponseTest.php
-test/Model/ShowBarcodeResponseTest.php
