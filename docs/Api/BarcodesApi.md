@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **createBarcode**
-> createBarcode($instance)
+> \BarcodeService\Model\ComponentsSchemasCreateBarcodeResponse createBarcode($instance)
 
 Create an unique barcode
 
@@ -26,7 +26,8 @@ $apiInstance = new BarcodeService\Api\BarcodesApi(
 $instance = new \stdClass; // object | 
 
 try {
-    $apiInstance->createBarcode($instance);
+    $result = $apiInstance->createBarcode($instance);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BarcodesApi->createBarcode: ', $e->getMessage(), PHP_EOL;
 }
@@ -41,7 +42,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**\BarcodeService\Model\ComponentsSchemasCreateBarcodeResponse**](../Model/ComponentsSchemasCreateBarcodeResponse.md)
 
 ### Authorization
 
@@ -55,7 +56,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **showBarcode**
-> showBarcode($code, $accept)
+> \BarcodeService\Model\ComponentsSchemasShowBarcodeResponse showBarcode($code, $accept)
 
 Show the barcode for a code
 
@@ -73,7 +74,8 @@ $code = new \stdClass; // object |
 $accept = new \stdClass; // object | 
 
 try {
-    $apiInstance->showBarcode($code, $accept);
+    $result = $apiInstance->showBarcode($code, $accept);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BarcodesApi->showBarcode: ', $e->getMessage(), PHP_EOL;
 }
@@ -89,7 +91,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**\BarcodeService\Model\ComponentsSchemasShowBarcodeResponse**](../Model/ComponentsSchemasShowBarcodeResponse.md)
 
 ### Authorization
 

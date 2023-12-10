@@ -96,11 +96,12 @@ class BarcodesApi
      *
      * @throws \BarcodeService\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \BarcodeService\Model\ComponentsSchemasCreateBarcodeResponse
      */
     public function createBarcode($instance)
     {
-        $this->createBarcodeWithHttpInfo($instance);
+        list($response) = $this->createBarcodeWithHttpInfo($instance);
+        return $response;
     }
 
     /**
@@ -112,11 +113,11 @@ class BarcodesApi
      *
      * @throws \BarcodeService\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \BarcodeService\Model\ComponentsSchemasCreateBarcodeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function createBarcodeWithHttpInfo($instance)
     {
-        $returnType = '';
+        $returnType = '\BarcodeService\Model\ComponentsSchemasCreateBarcodeResponse';
         $request = $this->createBarcodeRequest($instance);
 
         try {
@@ -147,10 +148,32 @@ class BarcodesApi
                 );
             }
 
-            return [null, $statusCode, $response->getHeaders()];
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\BarcodeService\Model\ComponentsSchemasCreateBarcodeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -188,14 +211,28 @@ class BarcodesApi
      */
     public function createBarcodeAsyncWithHttpInfo($instance)
     {
-        $returnType = '';
+        $returnType = '\BarcodeService\Model\ComponentsSchemasCreateBarcodeResponse';
         $request = $this->createBarcodeRequest($instance);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -325,11 +362,12 @@ class BarcodesApi
      *
      * @throws \BarcodeService\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \BarcodeService\Model\ComponentsSchemasShowBarcodeResponse
      */
     public function showBarcode($code, $accept)
     {
-        $this->showBarcodeWithHttpInfo($code, $accept);
+        list($response) = $this->showBarcodeWithHttpInfo($code, $accept);
+        return $response;
     }
 
     /**
@@ -342,11 +380,11 @@ class BarcodesApi
      *
      * @throws \BarcodeService\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \BarcodeService\Model\ComponentsSchemasShowBarcodeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function showBarcodeWithHttpInfo($code, $accept)
     {
-        $returnType = '';
+        $returnType = '\BarcodeService\Model\ComponentsSchemasShowBarcodeResponse';
         $request = $this->showBarcodeRequest($code, $accept);
 
         try {
@@ -377,10 +415,32 @@ class BarcodesApi
                 );
             }
 
-            return [null, $statusCode, $response->getHeaders()];
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\BarcodeService\Model\ComponentsSchemasShowBarcodeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -420,14 +480,28 @@ class BarcodesApi
      */
     public function showBarcodeAsyncWithHttpInfo($code, $accept)
     {
-        $returnType = '';
+        $returnType = '\BarcodeService\Model\ComponentsSchemasShowBarcodeResponse';
         $request = $this->showBarcodeRequest($code, $accept);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();

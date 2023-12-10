@@ -64,7 +64,8 @@ $apiInstance = new BarcodeService\Api\BarcodesApi(
 $instance = new \stdClass; // object | 
 
 try {
-    $apiInstance->createBarcode($instance);
+    $result = $apiInstance->createBarcode($instance);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BarcodesApi->createBarcode: ', $e->getMessage(), PHP_EOL;
 }
